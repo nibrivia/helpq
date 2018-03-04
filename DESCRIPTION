@@ -1,0 +1,22 @@
+Package: helpq
+Type: Package
+Title: Interface to the 6.004 queue
+Version: 0.0.0.9000
+Authors@R: c(
+  person("Olivia", "Brode-Roger", email ="nibr@mit.edu", role = c("cre", "aut", "cph"))
+  )
+Description: An interface to the 6.004 queue and schedule
+Imports:
+  dplyr
+  ,httr
+  ,jsonlite
+  ,lubridate
+  ,magrittr
+  ,purrr
+  ,rvest
+  ,tidyr
+License: MIT + file LICENSE
+Encoding: UTF-8
+LazyData: true
+Suggests: testthat
+RoxygenNote: 6.0.1
