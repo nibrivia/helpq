@@ -22,3 +22,36 @@ group_schedule <- function(hours) {
     select(kerberos, session_day = shift_day, start, end)
 }
 
+#' Title
+#'
+#' @param schedule
+#' @param times
+#'
+#' @return
+#' @export
+#'
+#' @examples
+staff_on_duty <- function(staffing, shifts) {
+  staffing %>%
+    filter(shift %in% shifts) %>%
+    select(shift, kerberos) %>%
+    group_by(shift) %>%
+      summarise(staff = list(kerberos)) %>%
+      ungroup()
+}
+
+#' Title
+#'
+#' @param staffing_df
+#'
+#' @return
+#' @export
+#'
+#' @examples
+staffing_to_list <- function(staffing_df) {
+  staffing_list        <- staffing_df[["staff"]]
+  names(staffing_list) <- staffing_df[["shift"]]
+
+  return(staffing_list)
+}
+
