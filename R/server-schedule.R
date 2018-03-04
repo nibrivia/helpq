@@ -9,10 +9,10 @@
 get_staffing <- function() {
   # Authenticate and grab staffing
   resp <- POST("https://6004.mit.edu/login",
-               body = list(url = "https://6004.mit.edu/user/lab_hours",
-                           `_id` = "nibr",
+               body = list(url      = "https://6004.mit.edu/user/lab_hours",
+                           `_id`    = Sys.getenv("helpq_username"),
                            password = Sys.getenv("helpq_password"),
-                           submit = "Login"),
+                           submit   = "Login"),
                encode = "form")
 
   # Extract global vars
