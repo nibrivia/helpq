@@ -12,8 +12,9 @@ staff_on_duty(staffing, shifts)
 \item{shifts}{What shifts are we interested in (not times)}
 }
 \value{
-A nested dataframe, with two cols: `shift`, `staff`. Each row of
-  `staff` contains a char vector of the staff on duty then.
+A nested dataframe, sorted by shift with two cols: `shift`, `staff`.
+  Each row of `staff` contains a char vector of the staff on duty then. If no
+  staff are on duty, staff is `list(NA)`.
 }
 \description{
 Who's on duty now?

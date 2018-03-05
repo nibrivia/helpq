@@ -31,6 +31,15 @@ test_that("Time to Hour", {
     expect_equal(wdays)
 })
 
+test_that("Shift start/end time", {
+  start_times <- shifts %>% shift_start_time()
+  end_times   <- shifts %>% shift_end_time()
+
+  diff <- end_times-start_times
+
+  expect_true(all(diff == dminutes(30)))
+})
+
 test_that("DST works okay", {
   time <- as_datetime("2018-03-11 22:30:00 EDT")
 

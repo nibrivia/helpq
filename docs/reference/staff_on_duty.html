@@ -94,19 +94,20 @@
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>shifts</th>
-      <td><p>What shifts are we interested in (not times)</p></td>
+      <th>staffing</th>
+      <td><p>Staff schedule (ungrouped)</p></td>
     </tr>
     <tr>
-      <th>schedule</th>
-      <td><p>Staff schedule (ungrouped)</p></td>
+      <th>shifts</th>
+      <td><p>What shifts are we interested in (not times)</p></td>
     </tr>
     </table>
     
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>A nested dataframe, with two cols: `shift`, `staff`. Each row of
-  `staff` contains a char vector of the staff on duty then.</p>
+    <p>A nested dataframe, sorted by shift with two cols: `shift`, `staff`.
+  Each row of `staff` contains a char vector of the staff on duty then. If no
+  staff are on duty, staff is `list(NA)`.</p>
     
 
   </div>

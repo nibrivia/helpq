@@ -64,6 +64,21 @@
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># install.packages("devtools")</span>
 devtools<span class="op">::</span><span class="kw"><a href="http://www.rdocumentation.org/packages/devtools/topics/install_github">install_github</a></span>(<span class="st">"helpq/nibrivia"</span>)</code></pre></div>
 </div>
+<div id="authentication" class="section level2">
+<h2 class="hasAnchor">
+<a href="#authentication" class="anchor"></a>Authentication</h2>
+<p>Bits of this package require authentication. These are not yet nicely unified.</p>
+<div id="queue" class="section level3">
+<h3 class="hasAnchor">
+<a href="#queue" class="anchor"></a>Queue</h3>
+<p>The queue datalog is in a database. You need to have an ODBC setup that allows you to access it as <code>helpq</code>.</p>
+</div>
+<div id="staffing" class="section level3">
+<h3 class="hasAnchor">
+<a href="#staffing" class="anchor"></a>Staffing</h3>
+<p>The staff schedule requires a 6.004 account to access. The credentials should be stored in environment variables <code>helpq_username</code> and <code>helpq_password</code>.</p>
+</div>
+</div>
 </div>
   </div>
 

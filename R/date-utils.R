@@ -45,7 +45,7 @@ shift_to_time <- shift_start_time
 #' @export
 #'
 shift_end_time <- function(shifts) {
-  shift_end_time(shifts) +
+  shift_start_time(shifts) +
     minutes(30)
 }
 

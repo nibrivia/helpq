@@ -99,3 +99,18 @@ test_that("Shift-based dataframe to list", {
   duty_df_from_list$shift %>% expect_equal(fake_on_duty$shift)
   duty_df_from_list$staff %>% expect_equal(fake_on_duty$staff)
 })
+
+
+test_that("Individual shift fetching", {
+  shifts <- c("Tue1200", "Tue1230", "Tue1300")
+
+  duty_df <- fake_staffing %>%
+    staff_on_duty(shifts)
+
+  duty_df_from_fake <- fake_on_duty %>%
+    filter(shift %in% shifts) %>%
+    dplyr::add_row(shift = 'Tue1200', staff = list(NA), .before = 1)
+
+  duty_df$shift %>% expect_equal(duty_df_from_fake$shift)
+  duty_df$staff %>% expect_equal(duty_df_from_fake$staff)
+})

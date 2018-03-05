@@ -30,15 +30,19 @@ group_schedule <- function(hours) {
 #'
 #' @return A nested dataframe, sorted by shift with two cols: `shift`, `staff`.
 #'   Each row of `staff` contains a char vector of the staff on duty then. If no
-#'   staff are on duty, staff is empty list (NULL).
+#'   staff are on duty, staff is `list(NA)`.
+#'
+#' @importFrom dplyr left_join
 #' @export
 #'
 staff_on_duty <- function(staffing, shifts) {
-  data_frame(shift = shifts) %>%
+  tibble::data_frame(shift = shifts) %>%
     left_join(staffing, by = "shift") %>%
     select(shift, kerberos) %>%
     group_by(shift) %>%
-      summarise(staff = ifelse(any(is.na(kerberos)), list(), list(kerberos))) %>%
+      summarise(staff = ifelse(any(is.na(kerberos)),
+                               list(NA),
+                               kerberos %>% sort() %>% list())) %>%
       ungroup()
 }
 
@@ -48,7 +52,7 @@ staff_on_duty <- function(staffing, shifts) {
 #'
 #' @return A nested dataframe sorted by shift, with two cols: `shift`,
 #'   `staff`.Each row of `staff` contains a char vector of the staff on duty
-#'   then. If no staff are on duty, staff is empty list (NULL). Staff list
+#'   then. If no staff are on duty, staff is NA. Staff list
 #'   sorted alphabetically.
 #' @export
 #'
