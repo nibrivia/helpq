@@ -14,3 +14,17 @@ You can install helpq from github with:
 devtools::install_github("helpq/nibrivia")
 ```
 
+## Authentication
+
+Bits of this package require authentication. These are not yet nicely unified.
+
+### Queue
+
+The queue datalog is in a database. You need to have an ODBC setup that allows
+you to access it as `helpq`.
+
+### Staffing
+
+
+The staff schedule requires a 6.004 account to access. The credentials should be
+stored in environment variables `helpq_username` and `helpq_password`.
