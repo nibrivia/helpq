@@ -6,7 +6,6 @@
 #' @return A dbPool object that can be used to connect to the database.
 #' @export
 #'
-#' @examples
 get_pool <- function() {
   pool::dbPool(
     drv = odbc::odbc(),
@@ -22,13 +21,12 @@ get_pool <- function() {
 #'   rows
 #' @export
 #'
-#' @examples
 student_q <- function(pool) {
   pool %>%
     tbl("StudentQ") %>%
     collect() %>%
-    mutate(time = as_datetime(time),
-           being_helped = being_helped > 0)
+    mutate(time = as_datetime(.$time),
+           being_helped = .$being_helped > 0)
 }
 
 #' Get staff queue
@@ -38,11 +36,12 @@ student_q <- function(pool) {
 #' @return A dataframe describing the staff side of the queue. Redundant rows.
 #' @export
 #'
-#' @examples
+#' @importFrom dplyr tbl collect
+#'
 staff_q <- function(pool) {
   pool %>%
     tbl("StaffQ") %>%
     collect() %>%
-    mutate(time = as_datetime(time),
-           is_helping = is_helping > 0)
+    mutate(time = as_datetime(.$time),
+           is_helping = .$is_helping > 0)
 }

@@ -7,9 +7,9 @@
 staff_on_duty(staffing, shifts)
 }
 \arguments{
-\item{shifts}{What shifts are we interested in (not times)}
+\item{staffing}{Staff schedule (ungrouped)}
 
-\item{schedule}{Staff schedule (ungrouped)}
+\item{shifts}{What shifts are we interested in (not times)}
 }
 \value{
 A nested dataframe, with two cols: `shift`, `staff`. Each row of

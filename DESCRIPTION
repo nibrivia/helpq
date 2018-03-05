@@ -12,6 +12,8 @@ Imports:
   ,jsonlite
   ,lubridate
   ,magrittr
+  ,odbc
+  ,pool
   ,purrr
   ,rvest
   ,tibble

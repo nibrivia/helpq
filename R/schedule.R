@@ -9,7 +9,7 @@
 group_schedule <- function(hours) {
   hours %>%
     group_by(kerberos, shift_day) %>%
-      arrange(shift_time) %>%
+      arrange(.$shift_time) %>%
       mutate(is_new_session = (shift_time - lag(shift_time, default = -Inf)) > dhours(0.5),
              session        = cumsum(is_new_session)) %>%
 
@@ -25,7 +25,7 @@ group_schedule <- function(hours) {
 
 #' Who's on duty now?
 #'
-#' @param schedule Staff schedule (ungrouped)
+#' @param staffing Staff schedule (ungrouped)
 #' @param shifts   What shifts are we interested in (not times)
 #'
 #' @return A nested dataframe, with two cols: `shift`, `staff`. Each row of
@@ -34,10 +34,10 @@ group_schedule <- function(hours) {
 #'
 staff_on_duty <- function(staffing, shifts) {
   staffing %>%
-    filter(shift %in% shifts) %>%
-    select(shift, kerberos) %>%
-    group_by(shift) %>%
-      summarise(staff = list(kerberos)) %>%
+    filter(.$shift %in% shifts) %>%
+    select(.$shift, .$kerberos) %>%
+    group_by(.$shift) %>%
+      summarise(staff = list(.$kerberos)) %>%
       ungroup()
 }
 

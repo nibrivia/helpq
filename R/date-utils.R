@@ -51,7 +51,7 @@ time_to_hour <- function(times) {
 
 #' Day string to ordered factor
 #'
-#' @param days vector of strings to convert
+#' @param times vector of strings to convert
 #'
 #' @return ordered factors for a week starting on Monday
 #' @export

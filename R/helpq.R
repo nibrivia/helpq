@@ -27,3 +27,5 @@ NULL
 #' @importFrom magrittr %>%
 #' @usage lhs \%>\% rhs
 NULL
+
+globalVariables(".")

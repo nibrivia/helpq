@@ -7,7 +7,7 @@
 time_to_weekday(times)
 }
 \arguments{
-\item{days}{vector of strings to convert}
+\item{times}{vector of strings to convert}
 }
 \value{
 ordered factors for a week starting on Monday

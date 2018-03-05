@@ -22,7 +22,7 @@ fake_staffing <- tibble::frame_data(
 
   'aphacker',  'Thu1300'
 ) %>%
-  mutate(shift_time = shift_to_time(shift),
+  mutate(shift_time = shift_to_time(.$shift),
          shift_day  = shift_time %>% time_to_weekday(),
          shift_hour = shift_time %>% time_to_hour())
 
@@ -40,6 +40,7 @@ fake_schedule <- tibble::frame_data(
 
 test_that("Staffing->Schedule okay", {
   generated_schedule <- fake_staffing %>% group_schedule()
+  print(generated_schedule)
 
   generated_schedule$kerberos %>%
     expect_equal(fake_schedule$kerberos)
