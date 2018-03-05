@@ -25,10 +25,11 @@ time_to_shift <- function(datetimes = now()) {
 #' @export
 #'
 shift_to_time <- function(shifts) {
+  Sys.setenv('TZ'='America/New_York')
   system2(command = "date",
           args    = c("-f", "-",    #date: read stdin
                       "--rfc-3339=seconds"),
-          input = shifts,
+          input = paste("TZ='America/New_York'", shifts),
           stdout = TRUE) %>%
     as_datetime(tz = "America/New_York")
 }
