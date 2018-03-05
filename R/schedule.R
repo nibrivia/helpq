@@ -28,17 +28,44 @@ group_schedule <- function(hours) {
 #' @param staffing Staff schedule (ungrouped)
 #' @param shifts   What shifts are we interested in (not times)
 #'
-#' @return A nested dataframe, with two cols: `shift`, `staff`. Each row of
-#'   `staff` contains a char vector of the staff on duty then.
+#' @return A nested dataframe, sorted by shift with two cols: `shift`, `staff`.
+#'   Each row of `staff` contains a char vector of the staff on duty then. If no
+#'   staff are on duty, staff is empty list (NULL).
 #' @export
 #'
 staff_on_duty <- function(staffing, shifts) {
-  staffing %>%
-    filter(.$shift %in% shifts) %>%
-    select(.$shift, .$kerberos) %>%
-    group_by(.$shift) %>%
-      summarise(staff = list(.$kerberos)) %>%
+  data_frame(shift = shifts) %>%
+    left_join(staffing, by = "shift") %>%
+    select(shift, kerberos) %>%
+    group_by(shift) %>%
+      summarise(staff = ifelse(any(is.na(kerberos)), list(), list(kerberos))) %>%
       ungroup()
+}
+
+#' Who's on duty now?
+#'
+#' @param staffing Staff schedule (ungrouped)
+#'
+#' @return A nested dataframe sorted by shift, with two cols: `shift`,
+#'   `staff`.Each row of `staff` contains a char vector of the staff on duty
+#'   then. If no staff are on duty, staff is empty list (NULL). Staff list
+#'   sorted alphabetically.
+#' @export
+#'
+staffing_by_shift <- function(staffing) {
+  staffing %>%
+    select(shift, kerberos) %>%
+    group_by(shift) %>%
+      summarise(staff = kerberos %>% sort() %>% list()) %>%
+      ungroup() %>%
+
+    ## Sort
+    mutate(shift_day  = shift %>% shift_to_time() %>% time_to_weekday(),
+           shift_hour = shift %>% shift_to_time() %>% time_to_hour()) %>%
+    arrange(shift_day, shift_hour) %>%
+
+    ##Remove temp cols
+    select(shift, staff)
 }
 
 #' Convert staffing dataframe to a list

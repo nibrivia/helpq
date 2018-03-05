@@ -35,14 +35,14 @@ get_staffing <- function() {
   hours <- hours_list %>%
     map(as_tibble) %>%
     map2_df(names(.), ~ .x %>% mutate(kerberos = .y)) %>%
-    rename(shift = .$value) %>%
+    rename(shift = value) %>%
     mutate(shift = gsub("Late", "2300", .$shift))
 
 
   hours %>%
     mutate(shift_time = shift_to_time(.$shift),
-           shift_day  = time_to_weekday(.$shift_time),
-           shift_hour = time_to_hour(.$shift_time)) %>%
+           shift_day  = time_to_weekday(shift_time),
+           shift_hour = time_to_hour(shift_time)) %>%
     arrange(.$kerberos, .$shift_day, .$shift_time)
 }
 
