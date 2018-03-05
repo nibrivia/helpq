@@ -1,7 +1,7 @@
 #' helpq: An R package to interface with 6.004 tools
 #'
 #' @docType package
-#' @name foo
+#' @name helpq
 #'
 #' @importFrom dplyr mutate filter group_by arrange summarize summarise select
 #'   ungroup rename
