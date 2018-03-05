@@ -20,6 +20,8 @@ time_to_shift <- function(datetimes = now()) {
 #'
 #' @return datetimes corresponding to the next such shift (if the day is today,
 #'   returns today's shift)
+#'
+#' @importFrom lubridate as_datetime
 #' @export
 #'
 shift_to_time <- function(shifts) {
@@ -39,8 +41,10 @@ shift_to_time <- function(shifts) {
 #' @export
 #'
 time_to_hour <- function(times) {
-  (times - floor_date(times, "day")) %>%
-    as.numeric()
+  hours <- times %>% hour()
+  mins  <- times %>% minute()
+
+  hours + mins/60
 }
 
 
