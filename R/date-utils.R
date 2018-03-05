@@ -23,8 +23,9 @@ time_to_shift <- function(datetimes = now()) {
 #'
 #' @importFrom lubridate as_datetime
 #' @export
+#' @aliases shift_to_time
 #'
-shift_to_time <- function(shifts) {
+shift_start_time <- function(shifts) {
   Sys.setenv('TZ'='America/New_York')
   system2(command = "date",
           args    = c("-f", "-",    #date: read stdin
@@ -32,6 +33,20 @@ shift_to_time <- function(shifts) {
           input = shifts,
           stdout = TRUE) %>%
     as_datetime(tz = "America/New_York")
+}
+
+shift_to_time <- shift_start_time
+
+#' Get shift end time
+#'
+#' @inheritParams shift_start_time
+#'
+#' @return datetimes corresponding to the end of the shift.
+#' @export
+#'
+shift_end_time <- function(shifts) {
+  shift_end_time(shifts) +
+    minutes(30)
 }
 
 #' Converts a date to a decimal hour component
