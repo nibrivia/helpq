@@ -29,7 +29,7 @@ shift_to_time <- function(shifts) {
   system2(command = "date",
           args    = c("-f", "-",    #date: read stdin
                       "--rfc-3339=seconds"),
-          input = paste("TZ='America/New_York'", shifts),
+          input = shifts,
           stdout = TRUE) %>%
     as_datetime(tz = "America/New_York")
 }

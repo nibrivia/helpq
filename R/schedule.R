@@ -15,10 +15,11 @@ group_schedule <- function(hours) {
 
     group_by(kerberos, shift_day, session) %>%
       summarise(start = min(shift_time),
-                end   = max(shift_time) + dhours(0.5)) %>%
+                end   = max(shift_time)) %>%
       ungroup() %>%
 
-    mutate(duration = end - start) %>%
+    mutate(start    = time_to_shift(start),
+           end      = time_to_shift(end)) %>%
     select(kerberos, session_day = shift_day, start, end)
 }
 
