@@ -28,3 +28,8 @@ you to access it as `helpq`.
 
 The staff schedule requires a 6.004 account to access. The credentials should be
 stored in environment variables `helpq_username` and `helpq_password`.
+
+
+## Documentation
+
+The [doc website](https://nibrivia.github.io/helpq) or getting in touch directly.
