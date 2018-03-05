@@ -2,13 +2,17 @@
 % Please edit documentation in R/server-queue.R
 \name{student_q}
 \alias{student_q}
-\title{Title}
+\title{Get student queue}
 \usage{
 student_q(pool)
 }
 \arguments{
-\item{pool}{}
+\item{pool}{Connection to the database}
+}
+\value{
+A dataframe describing the student side of the queue. Many redundant
+  rows
 }
 \description{
-Title
+Get student queue
 }

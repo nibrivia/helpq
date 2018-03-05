@@ -22,15 +22,15 @@ group_schedule <- function(hours) {
     select(kerberos, session_day = shift_day, start, end)
 }
 
-#' Title
+#' Who's on duty now?
 #'
-#' @param schedule
-#' @param times
+#' @param schedule Staff schedule (ungrouped)
+#' @param shifts   What shifts are we interested in (not times)
 #'
-#' @return
+#' @return A nested dataframe, with two cols: `shift`, `staff`. Each row of
+#'   `staff` contains a char vector of the staff on duty then.
 #' @export
 #'
-#' @examples
 staff_on_duty <- function(staffing, shifts) {
   staffing %>%
     filter(shift %in% shifts) %>%
@@ -40,14 +40,16 @@ staff_on_duty <- function(staffing, shifts) {
       ungroup()
 }
 
-#' Title
+#' Convert staffing dataframe to a list
 #'
-#' @param staffing_df
+#' This is a helper for when we want a list to use as \code{on_duty[now]}
 #'
-#' @return
+#' @param staffing_df A dataframe as output by \link{staff_on_duty}
+#'
+#' @return A named list: the name is the shift, the content is a charactor
+#'   vector with the staff on duty then
 #' @export
 #'
-#' @examples
 staffing_to_list <- function(staffing_df) {
   staffing_list        <- staffing_df[["staff"]]
   names(staffing_list) <- staffing_df[["shift"]]

@@ -1,21 +1,25 @@
-#' Title
+#' Get database pool
 #'
-#' @return
+#' This is probably just a temporary function, will be replaced with better auth
+#' later. Requires odbc to be properly setup...
+#'
+#' @return A dbPool object that can be used to connect to the database.
 #' @export
 #'
 #' @examples
 get_pool <- function() {
-  pool <- pool::dbPool(
+  pool::dbPool(
     drv = odbc::odbc(),
     dsn = "helpq"
   )
 }
 
-#' Title
+#' Get student queue
 #'
-#' @param pool
+#' @param pool Connection to the database
 #'
-#' @return
+#' @return A dataframe describing the student side of the queue. Many redundant
+#'   rows
 #' @export
 #'
 #' @examples
@@ -27,11 +31,11 @@ student_q <- function(pool) {
            being_helped = being_helped > 0)
 }
 
-#' Title
+#' Get staff queue
 #'
-#' @param pool
+#' @inheritParams student_q
 #'
-#' @return
+#' @return A dataframe describing the staff side of the queue. Redundant rows.
 #' @export
 #'
 #' @examples

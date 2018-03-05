@@ -95,70 +95,16 @@
       <tbody>
         <tr>
           <th colspan="2">
-            <h2 id="section-all-functions" class="hasAnchor"><a href="#section-all-functions" class="anchor"></a>All functions</h2>
-            <p class="section-desc"></p>
+            <h2 id="section-shift-date-utilities" class="hasAnchor"><a href="#section-shift-date-utilities" class="anchor"></a>Shift/Date utilities</h2>
+            <p class="section-desc"><p>Functions for dealing with 6.004 shifts and dates</p></p>
           </th>
         </tr>
         <tr>
           <!--  -->
           <td>
-            <p><code><a href="get_pool.html">get_pool</a></code> </p>
-          </td>
-          <td><p>Title</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="get_staffing.html">get_staffing</a></code> </p>
-          </td>
-          <td><p>Gets the current staffing schedule from the server</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="group_schedule.html">group_schedule</a></code> </p>
-          </td>
-          <td><p>Groups unprocessed dataframe into sessions</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="helpq.html">helpq</a></code> </p>
-          </td>
-          <td><p>helpq: An R package to interface with 6.004 tools</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
             <p><code><a href="shift_to_time.html">shift_to_time</a></code> </p>
           </td>
           <td><p>Convert shift strings to datetimes</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="staff_on_duty.html">staff_on_duty</a></code> </p>
-          </td>
-          <td><p>Title</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="staff_q.html">staff_q</a></code> </p>
-          </td>
-          <td><p>Title</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="staffing_to_list.html">staffing_to_list</a></code> </p>
-          </td>
-          <td><p>Title</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="student_q.html">student_q</a></code> </p>
-          </td>
-          <td><p>Title</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="time_to_hour.html">time_to_hour</a></code> </p>
-          </td>
-          <td><p>Converts a date to a decimal hour component</p></td>
         </tr><tr>
           <!--  -->
           <td>
@@ -168,9 +114,67 @@
         </tr><tr>
           <!--  -->
           <td>
+            <p><code><a href="time_to_hour.html">time_to_hour</a></code> </p>
+          </td>
+          <td><p>Converts a date to a decimal hour component</p></td>
+        </tr><tr>
+          <!--  -->
+          <td>
             <p><code><a href="time_to_weekday.html">time_to_weekday</a></code> </p>
           </td>
           <td><p>Day string to ordered factor</p></td>
+        </tr>
+      </tbody><tbody>
+        <tr>
+          <th colspan="2">
+            <h2 id="section-queue-data-server" class="hasAnchor"><a href="#section-queue-data-server" class="anchor"></a>Queue data server</h2>
+            <p class="section-desc"><p>Functions for connecting to the queue-log database</p></p>
+          </th>
+        </tr>
+        <tr>
+          <!--  -->
+          <td>
+            <p><code><a href="get_pool.html">get_pool</a></code> </p>
+          </td>
+          <td><p>Get database pool</p></td>
+        </tr><tr>
+          <!--  -->
+          <td>
+            <p><code><a href="student_q.html">student_q</a></code> </p>
+          </td>
+          <td><p>Get student queue</p></td>
+        </tr><tr>
+          <!--  -->
+          <td>
+            <p><code><a href="staff_q.html">staff_q</a></code> </p>
+          </td>
+          <td><p>Get staff queue</p></td>
+        </tr>
+      </tbody><tbody>
+        <tr>
+          <th colspan="2">
+            <h2 id="section-staffing-server" class="hasAnchor"><a href="#section-staffing-server" class="anchor"></a>Staffing server</h2>
+            <p class="section-desc"><p>Functions for dealing with 6004.mit.edu and getting the data into a nice form</p></p>
+          </th>
+        </tr>
+        <tr>
+          <!--  -->
+          <td>
+            <p><code><a href="get_staffing.html">get_staffing</a></code> </p>
+          </td>
+          <td><p>Gets the current staffing schedule from the server</p></td>
+        </tr><tr>
+          <!--  -->
+          <td>
+            <p><code><a href="staffing_to_list.html">staffing_to_list</a></code> </p>
+          </td>
+          <td><p>Convert staffing dataframe to a list</p></td>
+        </tr><tr>
+          <!--  -->
+          <td>
+            <p><code><a href="group_schedule.html">group_schedule</a></code> </p>
+          </td>
+          <td><p>Groups unprocessed dataframe into sessions</p></td>
         </tr>
       </tbody>
       </table>
@@ -180,7 +184,9 @@
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
     <ul class="nav nav-pills nav-stacked">
-      <li><a href="#section-all-functions">All functions</a></li>
+      <li><a href="#section-shift-date-utilities">Shift/Date utilities</a></li>
+      <li><a href="#section-queue-data-server">Queue data server</a></li>
+      <li><a href="#section-staffing-server">Staffing server</a></li>
     </ul>
   </div>
 </div>

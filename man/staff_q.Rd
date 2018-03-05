@@ -2,13 +2,16 @@
 % Please edit documentation in R/server-queue.R
 \name{staff_q}
 \alias{staff_q}
-\title{Title}
+\title{Get staff queue}
 \usage{
 staff_q(pool)
 }
 \arguments{
-\item{pool}{}
+\item{pool}{Connection to the database}
+}
+\value{
+A dataframe describing the staff side of the queue. Redundant rows.
 }
 \description{
-Title
+Get staff queue
 }

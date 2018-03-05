@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Title — staffing_to_list • helpq</title>
+<title>Convert staffing dataframe to a list — staffing_to_list • helpq</title>
 
 <!-- jquery -->
 <script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha384-nrOSfDHtoPMzJHjVTdCopGqIqeYETSXhZDFyniQ8ZHcVy08QesyHcnOUpMpqnmWq" crossorigin="anonymous"></script>
@@ -27,9 +27,9 @@
 <script src="../pkgdown.js"></script>
   
   
-<meta property="og:title" content="Title — staffing_to_list" />
+<meta property="og:title" content="Convert staffing dataframe to a list — staffing_to_list" />
 
-<meta property="og:description" content="Title" />
+<meta property="og:description" content="This is a helper for when we want a list to use as on_duty[now]" />
 <meta name="twitter:card" content="summary" />
 <!-- mathjax -->
 <script src='https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML'></script>
@@ -81,11 +81,11 @@
       <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Title</h1>
+    <h1>Convert staffing dataframe to a list</h1>
     </div>
 
     
-    <p>Title</p>
+    <p>This is a helper for when we want a list to use as <code>on_duty[now]</code></p>
     
 
     <pre class="usage"><span class='fu'>staffing_to_list</span>(<span class='no'>staffing_df</span>)</pre>
@@ -95,9 +95,14 @@
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>staffing_df</th>
-      <td></td>
+      <td><p>A dataframe as output by <a href='staff_on_duty.html'>staff_on_duty</a></p></td>
     </tr>
     </table>
+    
+    <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
+
+    <p>A named list: the name is the shift, the content is a charactor
+  vector with the staff on duty then</p>
     
 
   </div>
@@ -105,7 +110,9 @@
     <h2>Contents</h2>
     <ul class="nav nav-pills nav-stacked">
       <li><a href="#arguments">Arguments</a></li>
-                </ul>
+      
+      <li><a href="#value">Value</a></li>
+          </ul>
 
   </div>
 </div>

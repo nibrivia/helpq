@@ -2,10 +2,14 @@
 % Please edit documentation in R/server-queue.R
 \name{get_pool}
 \alias{get_pool}
-\title{Title}
+\title{Get database pool}
 \usage{
 get_pool()
 }
+\value{
+A dbPool object that can be used to connect to the database.
+}
 \description{
-Title
+This is probably just a temporary function, will be replaced with better auth
+later. Requires odbc to be properly setup...
 }

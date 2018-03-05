@@ -1,0 +1,20 @@
+reference:
+  - title: "Shift/Date utilities"
+    desc : >
+      Functions for dealing with 6.004 shifts and dates
+    contents:
+      - matches("shift")
+      - matches("time")
+  - title: "Queue data server"
+    desc: >
+      Functions for connecting to the queue-log database
+    contents:
+      - get_pool
+      - student_q
+      - staff_q
+  - title: "Staffing server"
+    desc: >
+      Functions for dealing with 6004.mit.edu and getting the data into a nice form
+    contents:
+      - matches("staffing")
+      - matches("schedule")

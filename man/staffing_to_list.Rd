@@ -2,13 +2,17 @@
 % Please edit documentation in R/schedule.R
 \name{staffing_to_list}
 \alias{staffing_to_list}
-\title{Title}
+\title{Convert staffing dataframe to a list}
 \usage{
 staffing_to_list(staffing_df)
 }
 \arguments{
-\item{staffing_df}{}
+\item{staffing_df}{A dataframe as output by \link{staff_on_duty}}
+}
+\value{
+A named list: the name is the shift, the content is a charactor
+  vector with the staff on duty then
 }
 \description{
-Title
+This is a helper for when we want a list to use as \code{on_duty[now]}
 }

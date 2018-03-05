@@ -2,13 +2,19 @@
 % Please edit documentation in R/schedule.R
 \name{staff_on_duty}
 \alias{staff_on_duty}
-\title{Title}
+\title{Who's on duty now?}
 \usage{
 staff_on_duty(staffing, shifts)
 }
 \arguments{
-\item{times}{}
+\item{shifts}{What shifts are we interested in (not times)}
+
+\item{schedule}{Staff schedule (ungrouped)}
+}
+\value{
+A nested dataframe, with two cols: `shift`, `staff`. Each row of
+  `staff` contains a char vector of the staff on duty then.
 }
 \description{
-Title
+Who's on duty now?
 }
