@@ -1,18 +1,6 @@
-# library(highcharter)
-# library(hrbrthemes)
-# library(jsonlite)
-# library(lubridate)
 # library(pool)
-# library(shiny)
-# library(tidyverse)
-#
-# pool <- dbPool(
-#   drv = odbc::odbc(),
-#   dsn = "helpq"
-# )
-# onStop(function() {
-#   poolClose(pool)
-# })
+
+
 #
 # q_add_series <- function(dta) {
 #   function(hc, dim, ...) {
@@ -31,25 +19,7 @@
 #       end   = input$date_range[2] + days(0) + hours(3))
 #   })
 #
-#   student_q <- reactive({
-#     input$refresh
-#     pool %>%
-#       tbl("StudentQ") %>%
-#       filter(time >= date_range()[1] & time <= date_range()[2]) %>%
-#       collect() %>%
-#       mutate(time = as_datetime(time),
-#              being_helped = being_helped > 0)
-#   })
-#
-#   staff_q <- reactive({
-#     input$refresh
-#     pool %>%
-#       tbl("StaffQ") %>%
-#       filter(time >= date_range()[1] & time <= date_range()[2]) %>%
-#       collect() %>%
-#       mutate(time = as_datetime(time),
-#              is_helping = is_helping > 0)
-#   })
+
 #
 #   wait_data <- reactive({
 #     wait_data <- student_q() %>%
