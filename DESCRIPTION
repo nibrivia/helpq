@@ -8,7 +8,9 @@ Authors@R: c(
 Description: An interface to the 6.004 queue and schedule
 Imports:
   dplyr
+  ,ggplot2
   ,httr
+  ,hrbrthemes
   ,jsonlite
   ,lubridate
   ,magrittr
