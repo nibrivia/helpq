@@ -94,7 +94,7 @@ schedule_plot_horizontal <- function(schedule, now_line = FALSE) {
 
 }
 
-kerberos_name <- frame_data(
+kerberos_name <- tibble::frame_data(
   ~kerberos, ~name,
   "luok",     "Kara Luo",
   "hwdo",     "Hyung Wan Do",
