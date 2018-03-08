@@ -1,4 +1,4 @@
-from __future__ import print_function
+# from __future__ import print_function
 import httplib2
 import os
 
@@ -9,23 +9,20 @@ from oauth2client.file import Storage
 
 from google.oauth2 import service_account
 
+import csv
+import sys
 
 import datetime
 
 
 lab_calendar = "6.004 Lab hours"
 
-try:
-    import argparse
-    flags = argparse.ArgumentParser(parents=[tools.argparser]).parse_args()
-except ImportError:
-    flags = None
 
 # If modifying these scopes, delete your previously saved credentials
 # at ~/.credentials/calendar-python-quickstart.json
 SCOPES = ['https://www.googleapis.com/auth/calendar.readonly',
           'https://www.googleapis.com/auth/calendar']
-SERVICE_ACCOUNT_FILE = 'service_secret.json'
+SERVICE_ACCOUNT_FILE = '/home/nibr/helpq/inst/python/service_secret.json'
 APPLICATION_NAME = 'Google Calendar API Python Quickstart'
 
 
@@ -201,8 +198,6 @@ def main():
     print(get_staff_calendar_id(service, k))
   print("")
 
-  lab_hours_remove("helik", "2018-03-08T12:00:00-05:00", "2018-03-08T13:00:00-05:00")
-  lab_hours_add("helik", "2018-03-08T12:00:00-05:00", "2018-03-08T14:30:00-05:00")
 
   print("Events")
   for k in kerberoi:
@@ -242,4 +237,17 @@ def main():
 
 
 if __name__ == '__main__':
-    main()
+  for row in csv.reader(iter(sys.stdin.readline, '')):
+    action, kerberos, start, end = row
+
+    start = start[:-2] + ":" + start[-2:]
+    end   =   end[:-2] + ":" +   end[-2:]
+
+    if action == "add":
+      lab_hours_add(kerberos, start, end)
+    elif action == "remove":
+      lab_hours_remove(kerberos, start, end)
+    else:
+      print("idk what to do here")
+      break
+
