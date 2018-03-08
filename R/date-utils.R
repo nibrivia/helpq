@@ -74,3 +74,15 @@ time_to_hour <- function(times) {
 time_to_weekday <- function(times) {
   wday(times, label = T, week_start = 1)
 }
+
+
+#' Format time for Google Calendar use
+#'
+#' @param times times to convert
+#'
+#' @return Character vector of dates properly formatted
+#' @export
+#'
+time_to_gcal <- function(times) {
+  strftime(times, "%Y-%m-%dT%H:%M:%S%z")
+}
