@@ -85,7 +85,7 @@ schedule_plot_horizontal <- function(schedule, now_line = FALSE) {
               angle = 0,
               hjust = "right",
               check_overlap = TRUE) +
-    facet_grid(. ~ session_day, scales = "free_x") +
+    facet_grid(session_day ~ ., scales = "free_x") +
     scale_y_continuous(minor_breaks = 0:48/2,
                        breaks       = 0:24) +
     theme(panel.grid.major.y = element_blank(),
@@ -106,7 +106,9 @@ kerberos_name <- tibble::frame_data(
   "swampfox", "Frances Hartwell",
   "arielj",   "Ariel Jacobs",
   "dkogut",   "Dougie Kogut",
-  "helik",    "Kat Hendrickson"
+  "helik",    "Kat Hendrickson",
+  "rmsander", "Ryan Sander",
+  "ckonicki", "Christine Konicki"
 )
 
 schedule_attendance_plot <- function(schedule, pool = get_pool(), now_line = TRUE) {
@@ -114,6 +116,8 @@ schedule_attendance_plot <- function(schedule, pool = get_pool(), now_line = TRU
     staff_q() %>%
     filter(date(time) == today()) %>%
     left_join(kerberos_name, by = c("staff" = "name"))
+
+
 
   p <- schedule %>%
     filter(session_day == today() %>% time_to_weekday()) %>%
@@ -126,7 +130,7 @@ schedule_attendance_plot <- function(schedule, pool = get_pool(), now_line = TRU
                y = start_hour,
                ymax  =   end_hour))
 
-  p +
+  p <- p +
     geom_point(data = attendance,
                inherit.aes = FALSE,
                aes(y = time %>% time_to_hour(),
@@ -152,7 +156,7 @@ schedule_attendance_plot <- function(schedule, pool = get_pool(), now_line = TRU
                        breaks       = 0:24) +
     coord_flip() +
 
-    facet_grid(. ~ session_day, scales = "free_x") +
+    facet_grid(session_day ~ ., scales = "free_x") +
 
     hrbrthemes::theme_ipsum_rc() +
     theme(panel.grid.major.y = element_blank(),
