@@ -111,7 +111,7 @@ kerberos_name <- tibble::frame_data(
   "ckonicki", "Christine Konicki"
 )
 
-schedule_attendance_plot <- function(schedule, pool = get_pool(), now_line = TRUE) {
+schedule_plot_attendance <- function(schedule, pool = get_pool(), now_line = TRUE) {
   attendance <- pool %>%
     staff_q() %>%
     filter(date(time) == today()) %>%
