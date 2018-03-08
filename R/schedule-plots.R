@@ -12,15 +12,14 @@
 
 #' Title
 #'
-#' @param staffing
+#' @param schedule Lab schedule
 #'
-#' @return
+#' @return Nothing, plots
 #' @export
 #'
 #' @importFrom ggplot2 ggplot aes geom_segment geom_text geom_hline facet_grid
 #' @importFrom ggplot2 annotate scale_y_reverse theme labs guides element_blank
 #'
-#' @examples
 schedule_plot_base <- function(schedule) {
   schedule %>%
     mutate(start_hour  = shift_start_time(start) %>% time_to_hour(),
@@ -45,6 +44,13 @@ schedule_plot_base <- function(schedule) {
     guides(color = F)
 }
 
+#' Title
+#'
+#' @inheritParams schedule_plot_base
+#'
+#' @return Nothing, plots
+#' @export
+#'
 schedule_plot_vertical   <- function(schedule) {
   schedule_plot_base(schedule) +
     geom_text(aes(label = kerberos),
@@ -61,15 +67,14 @@ schedule_plot_vertical   <- function(schedule) {
 
 #' Title
 #'
-#' @param schedule
-#' @param now_line
+#' @param now_line plot a red line for now?
+#' @inheritParams schedule_plot_base
 #'
-#' @return
+#' @return Nothing, plots
 #' @export
 #'
 #' @importFrom ggplot2 scale_y_continuous geom_hline coord_flip
 #'
-#' @examples
 schedule_plot_horizontal <- function(schedule, now_line = FALSE) {
   p <- schedule_plot_base(schedule)
 
@@ -111,6 +116,15 @@ kerberos_name <- tibble::frame_data(
   "ckonicki", "Christine Konicki"
 )
 
+#' Attendance plot
+#'
+#' @param pool database pool
+#' @inheritParams schedule_plot_base
+#' @inheritParams schedule_plot_horizontal
+#'
+#' @return Nothing, plots
+#' @export
+#'
 schedule_plot_attendance <- function(schedule, pool = get_pool(), now_line = TRUE) {
   attendance <- pool %>%
     staff_q() %>%

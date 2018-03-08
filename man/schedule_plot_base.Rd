@@ -7,7 +7,10 @@
 schedule_plot_base(schedule)
 }
 \arguments{
-\item{staffing}{}
+\item{schedule}{Lab schedule}
+}
+\value{
+Nothing, plots
 }
 \description{
 Title
