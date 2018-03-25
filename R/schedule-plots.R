@@ -10,7 +10,7 @@
 
 
 
-#' Title
+#' Schedule plot basics
 #'
 #' @param schedule Lab schedule
 #'
@@ -110,7 +110,7 @@ kerberos_name <- tibble::frame_data(
   "adhikara", "Aradhana Adhikara",
   "swampfox", "Frances Hartwell",
   "arielj",   "Ariel Jacobs",
-  "dkogut",   "Dougie Kogut",
+  "dkogut",   "Douglas Kogut",
   "helik",    "Kat Hendrickson",
   "rmsander", "Ryan Sander",
   "ckonicki", "Christine Konicki"

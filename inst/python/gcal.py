@@ -1,4 +1,4 @@
-# from __future__ import print_function
+from __future__ import print_function
 import httplib2
 import os
 
@@ -16,6 +16,7 @@ import datetime
 
 
 lab_calendar = "6.004 Lab hours"
+calendar_ids = {}
 
 
 # If modifying these scopes, delete your previously saved credentials
@@ -70,10 +71,16 @@ def calendar_exists(service, kerberos):
   return False
 
 def get_staff_calendar_id(service, kerberos):
+  if kerberos in calendar_ids:
+    return calendar_ids[kerberos]
+
+
   if calendar_exists(service, kerberos):
     calendars = calendar_list(service)
     for c in calendars:
-      if c['summary'] == kerberos: return c['id']
+      calendar_ids[kerberos] = c['id'] # Add all the calendars, not just ours
+      if c['summary'] == kerberos:
+        return c['id']
   else:
     calendar = {
       'summary': kerberos,
@@ -90,12 +97,11 @@ def get_staff_calendar_id(service, kerberos):
     }
     service.acl().insert(calendarId=new_calendar['id'], body = rule).execute()
 
+    calendar_ids[kerberos] = new_calendar['id']
     return new_calendar['id']
 
 
-def lab_hours_add(kerberos, begin, end):
-  service = get_calendar_service()
-
+def lab_hours_add(service, kerberos, begin, end):
   event = {
     'summary': kerberos + " lab hours",
     'location': '32-083',
@@ -120,35 +126,42 @@ def lab_hours_add(kerberos, begin, end):
 
   ## Add to the staff's calendar
   cal_id = get_staff_calendar_id(service, kerberos)
+  print("")
+  print("Adding lab hours for ", kerberos, ": ", begin, " -> ", end, " (ind cal)")
   event = service.events().insert(calendarId=cal_id, body=event).execute()
 
   ## Add to the general calendar
   lab_id  = get_staff_calendar_id(service, "6.004 Lab hours")
+  event['summary'] = kerberos
+
+  print("Adding lab hours for ", kerberos, ": ", begin, " -> ", end, " (lab cal)")
   event = service.events().insert(calendarId=lab_id, body=event).execute()
 
 
 
 
-def lab_hours_remove(kerberos, begin, end):
-  service = get_calendar_service()
+def lab_hours_remove(service, kerberos, begin, end):
   lab_id  = get_staff_calendar_id(service, lab_calendar)
 
   # Remove from staff's calendar
   cal_id = get_staff_calendar_id(service, kerberos)
   events = get_lab_hours(service, kerberos)
+  print("")
+  print("Removing lab hours for ", kerberos, ": ", begin, " -> ", end)
 
   for e in events:
     if e['start']['dateTime'] == begin and e['end']['dateTime'] == end:
       service.events().delete(calendarId=cal_id, eventId = e['id']).execute()
+      print("Removed lab hours for ", kerberos, ": ", begin, " -> ", end, " (ind cal)")
 
   # Remove from lab's calendar
   cal_id = get_staff_calendar_id(service, lab_calendar)
   events = get_lab_hours(service, lab_calendar)
-  event_title = kerberos + " lab hours"
 
   for e in events:
-    if e['summary'] == event_title and e['start']['dateTime'] == begin and e['end']['dateTime'] == end:
+    if kerberos in e['summary'] and e['start']['dateTime'] == begin and e['end']['dateTime'] == end:
       service.events().delete(calendarId=lab_id, eventId = e['id']).execute()
+      print("Removed lab hours for ", kerberos, ": ", begin, " -> ", end, " (lab cal)")
 
 
 
@@ -192,24 +205,22 @@ def main():
   kerberoi = ["nibr", "6.004 Lab hours", "helik"]
 
   print("Calendars")
-  nibr_id = get_staff_calendar_id(service, "nibr")
-  lab_id  = get_staff_calendar_id(service, "6.004 Lab hours")
-  for k in kerberoi:
-    print(get_staff_calendar_id(service, k))
+  cs = sorted(calendar_list(service), key = lambda x: x['summary'])
+  for c in cs: print(c['summary'], "https://calendar.google.com/calendar/embed?src="+ c['id'])
   print("")
 
 
-  print("Events")
-  for k in kerberoi:
-    print(" ", k)
-    events = get_lab_hours(service, k)
-    for e in events:
-      print('  - id', e['id'])
-      print('  - title', e['summary'])
-      print('  - begin ', str(e['start']))
-      print('  - finish',   str(e['end']))
-      # service.events().delete(calendarId=lab_id, eventId = e['id']).execute()
-    print("")
+  # print("Events")
+  # for k in kerberoi:
+  #   print(" ", k)
+  #   events = get_lab_hours(service, k)
+  #   for e in events:
+  #     print('  - id', e['id'])
+  #     print('  - title', e['summary'])
+  #     print('  - begin ', str(e['start']))
+  #     print('  - finish',   str(e['end']))
+  #     # service.events().delete(calendarId=lab_id, eventId = e['id']).execute()
+  #   print("")
 
 
 
@@ -237,6 +248,8 @@ def main():
 
 
 if __name__ == '__main__':
+  main()
+  service = get_calendar_service()
   for row in csv.reader(iter(sys.stdin.readline, '')):
     action, kerberos, start, end = row
 
@@ -244,9 +257,9 @@ if __name__ == '__main__':
     end   =   end[:-2] + ":" +   end[-2:]
 
     if action == "add":
-      lab_hours_add(kerberos, start, end)
+      lab_hours_add(service, kerberos, start, end)
     elif action == "remove":
-      lab_hours_remove(kerberos, start, end)
+      lab_hours_remove(service, kerberos, start, end)
     else:
       print("idk what to do here")
       break
