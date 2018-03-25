@@ -88,7 +88,7 @@
     <p>Get staff queue</p>
     
 
-    <pre class="usage"><span class='fu'>staff_q</span>(<span class='no'>pool</span>)</pre>
+    <pre class="usage"><span class='fu'>staff_q</span>(<span class='no'>pool</span>, <span class='kw'>start</span> <span class='kw'>=</span> <span class='fu'>floor_date</span>(<span class='fu'>now</span>(), <span class='kw'>unit</span> <span class='kw'>=</span> <span class='st'>"day"</span>), <span class='kw'>end</span> <span class='kw'>=</span> <span class='fu'>now</span>())</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a> Arguments</h2>
     <table class="ref-arguments">
@@ -96,6 +96,14 @@
     <tr>
       <th>pool</th>
       <td><p>Connection to the database</p></td>
+    </tr>
+    <tr>
+      <th>start</th>
+      <td><p>Start time</p></td>
+    </tr>
+    <tr>
+      <th>end</th>
+      <td><p>End time</p></td>
     </tr>
     </table>
     

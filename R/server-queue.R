@@ -15,15 +15,18 @@ get_pool <- function() {
 
 #' Get student queue
 #'
-#' @param pool Connection to the database
+#' @param pool  Connection to the database
+#' @param start Start time
+#' @param end   End time
 #'
 #' @return A dataframe describing the student side of the queue. Many redundant
 #'   rows
 #' @export
 #'
-student_q <- function(pool) {
+student_q <- function(pool, start = floor_date(now(), unit = "day"), end = now()) {
   pool %>%
     tbl("StudentQ") %>%
+    filter(time >= start & time <= end) %>%
     collect() %>%
     mutate(time = as_datetime(.$time),
            being_helped = .$being_helped > 0)
@@ -36,7 +39,7 @@ student_q <- function(pool) {
 #' @return A simplified dataframe
 #' @export
 student_queue_deltas <- function(student_q_full) {
-  sq %>%
+  student_q_full %>%
 
     # Remove extra columns
     select(time, username, request, staff_username, position) %>%
@@ -72,19 +75,21 @@ student_queue_deltas <- function(student_q_full) {
 #'
 #' @importFrom dplyr tbl collect
 #'
-staff_q <- function(pool) {
+staff_q <- function(pool, start = floor_date(now(), unit = "day"), end = now()) {
   pool %>%
     tbl("StaffQ") %>%
+    filter(time >= start & time <= end) %>%
     collect() %>%
     mutate(time = as_datetime(.$time),
            is_helping = .$is_helping > 0)
 }
 
+
 #' Simplify staff queue
 #'
-#' @param staff_queue_full
+#' @param staff_queue_full A dataframe, output from staff_q()
 #'
-#' @return
+#' @return A simplified dataframe
 #' @export
 #'
 #' @examples
@@ -100,4 +105,22 @@ staff_queue_deltas <- function(staff_queue_full) {
     mutate(event = ifelse(enter, "enter",
                           ifelse(exit, "exit", NA)) %>%
              factor())
+}
+
+
+
+current_waiting <- function() {
+
+}
+
+current_helped <- function() {
+
+}
+
+current_staff <- function() {
+
+}
+
+current_wait <- function() {
+
 }

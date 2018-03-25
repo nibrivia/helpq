@@ -4,10 +4,14 @@
 \alias{student_q}
 \title{Get student queue}
 \usage{
-student_q(pool)
+student_q(pool, start = floor_date(now(), unit = "day"), end = now())
 }
 \arguments{
 \item{pool}{Connection to the database}
+
+\item{start}{Start time}
+
+\item{end}{End time}
 }
 \value{
 A dataframe describing the student side of the queue. Many redundant

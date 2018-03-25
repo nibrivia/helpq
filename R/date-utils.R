@@ -86,3 +86,4 @@ time_to_weekday <- function(times) {
 time_to_gcal <- function(times) {
   strftime(times, "%Y-%m-%dT%H:%M:%S%z")
 }
+

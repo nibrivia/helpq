@@ -2,7 +2,7 @@
 % Please edit documentation in R/schedule-plots.R
 \name{schedule_plot_base}
 \alias{schedule_plot_base}
-\title{Title}
+\title{Schedule plot basics}
 \usage{
 schedule_plot_base(schedule)
 }
@@ -13,5 +13,5 @@ schedule_plot_base(schedule)
 Nothing, plots
 }
 \description{
-Title
+Schedule plot basics
 }
