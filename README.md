@@ -7,7 +7,7 @@ The goal of helpq is to have a central location for all of the 6.004 queue relat
 
 ## Installation
 
-You can install helpq from github with:
+You can install helpq from [Github](https://github.com/nibrivia/helpq) with:
 
 ```R
 # install.packages("devtools")
